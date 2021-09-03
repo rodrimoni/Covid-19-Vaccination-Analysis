@@ -2,9 +2,12 @@
 
 # main
 
+inFileName = input("Input file name (CSV): ")
+outFileName = input("Output file name (CSV): ")
+
 try:
-    with open("antes.csv","r+", encoding="utf8") as inp:
-        with open('depois.csv','w+', encoding="utf8") as out:
+    with open(inFileName,"r+", encoding="utf8") as inp:
+        with open(outFileName,'w+', encoding="utf8") as out:
             # first line
             fLine = 'crs,codigo_municipio,nome_municipio,doses_destinadas,doses_aplicadas,primeira_dose,segunda_dose,dose_unica,nao_residentes,populacao_geral,pelo_menos_uma_dose,esquema_vacinal_completo\n'
             inp.readline() # removes the first line
@@ -32,4 +35,4 @@ try:
                 
                 cont = cont + 1
 except IOError:
-    print("Arquivo não pode ser aberto para leitura.")
+    print("Error while opening csv file.")
