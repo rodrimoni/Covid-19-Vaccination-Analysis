@@ -19,10 +19,11 @@ try:
             for x in lines:
                 x = x.replace('"','')                
                 x = x.replace('(',',')
-                x = x.replace(')','')
-                x = x.replace('%',',')                    
-                x = x.replace(' - ',',', 1)
-                x = x.replace(' ','')
+                x = x.replace(')','')                                    
+                x = x.replace(' - ',',', 1)                
+                x = x.replace('% ',',')                
+                x = x.replace('%',',')
+                x = x.replace(' ,',',')
                 if cont == len(lines): # last line without \n
                     x = x.replace('\n','')
                 dataLine = x.split(',')
