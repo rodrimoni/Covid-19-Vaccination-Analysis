@@ -1,4 +1,4 @@
-dash
-plotly
-pandas
-geobr
+dash >= 2.0
+plotly >= 5.2
+pandas >= 1.2
+geobr == 0.1.9
