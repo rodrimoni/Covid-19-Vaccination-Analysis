@@ -1,6 +1,9 @@
 import pandas as pd
+import geopandas as gpd
 from geobr import read_municipality
+from shapely import wkt
 import os
+import json
 
 basePath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 dataPath = os.path.join(basePath, 'data')
@@ -19,10 +22,11 @@ def getCityVaccineData():
     dados_vac['codigo_municipio'] = dados_vac['codigo_municipio'].astype(str)
 
     # Join dos bancos de vacinação
-    print(dados_vac.iloc[0])
+    #print(dados_vac.iloc[0])
     dados_vac = pd.merge(dados_vac, rs, left_on='codigo_municipio', right_on='code_muni')
     dados_vac = dados_vac.drop(columns = 'code_muni')
-    print(dados_vac.iloc[0])
+    #print(dados_vac.iloc[0]['geometry'])
 
-    return dados_vac
-
+    dados_vac['geometry'] = gpd.GeoSeries.from_wkt(dados_vac['geometry'])
+    geoDataFrameRS = gpd.GeoDataFrame(dados_vac, geometry='geometry')
+    return geoDataFrameRS.to_json()
